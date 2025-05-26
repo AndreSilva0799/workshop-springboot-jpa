@@ -1,13 +1,19 @@
 package com.educandoweb.course.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // para falar para o banco que sera autoIncrement
+    private Long id;  // @id para indicar que essa é a chave primaria
     private String name;
     private String email;
     private String phone;
