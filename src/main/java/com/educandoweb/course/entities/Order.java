@@ -1,5 +1,7 @@
 package com.educandoweb.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,8 +16,10 @@ public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-mm-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant moment;
+
 
     @ManyToOne
     @JoinColumn(name = "client_id") //muitos para um, estou falando que essa é a chave primaria
@@ -23,7 +27,7 @@ public class Order implements Serializable {
 
     public Order() {}
 
-    public Order(long id, Instant moment, User client) {
+    public Order(Long id, Instant moment, User client) {
         this.id = id;
         this.moment = moment;
         this.client = client;
@@ -32,7 +36,7 @@ public class Order implements Serializable {
     public long getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public Instant getMoment() {
